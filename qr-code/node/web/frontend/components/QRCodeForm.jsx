@@ -418,7 +418,8 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
             </Stack>
           </Card>
         </div>
-        <div>
+      </div>
+        <div className="w-full">
           {QRCode?.id && (
             <Button
               outline
@@ -430,7 +431,6 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
             </Button>
           )}
         </div>
-      </div>
     </div>
   );
 }
