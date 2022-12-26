@@ -28,7 +28,7 @@ import { useAuthenticatedFetch, useAppQuery } from "../hooks";
 
 /* Import custom hooks for forms */
 import { useForm, useField, notEmptyString } from "@shopify/react-form";
-
+import "../assets/index.min.css";
 const NO_DISCOUNT_OPTION = { label: "No discount", value: "" };
 
 /*
@@ -241,20 +241,20 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
 
   /* The form layout, created using Polaris and App Bridge components. */
   return (
-    <Stack vertical>
+    <div vertical  className='pt-20 w-full'>
       {deletedProduct && (
         <Banner
           title="The product for this QR code no longer exists."
           status="critical"
         >
-          <p>
+          <p class="my-5 text-base font-medium tracking-tight text-indigo-500">
             Scans will be directed to a 404 page, or you can choose another
             product for this QR code.
           </p>
         </Banner>
       )}
-      <Layout>
-        <Layout.Section>
+      <div class="flex flex-col w-full mt-0 lg:flex-row">
+        <div className="w-full p-4 mx-auto mb-0 sm:mb-16 lg:mb-0 lg:w-1/2">
           <Form>
             <ContextualSaveBar
               saveAction={{
@@ -273,14 +273,16 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
               fullWidth
             />
             <FormLayout>
-              <Card sectioned title="Title">
+              <div className="relative z-10 w-full bg-white rounded-lg shadow-lg py-4 px-4" >
+                <p sectioned title="Title">Title</p>
                 <TextField
+                className='pt-20'
                   {...title}
                   label="Title"
                   labelHidden
                   helpText="Only store staff can see this title"
                 />
-              </Card>
+              </div>
 
               <Card
                 title="Product"
@@ -324,9 +326,9 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
                     </Stack>
                   ) : (
                     <Stack vertical spacing="extraTight">
-                      <Button onClick={toggleResourcePicker}>
+                      <button onClick={toggleResourcePicker} className="relative self-start inline-block w-auto px-4 py-2 mx-auto mt-0 text-base font-400 text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0">
                         Select product
-                      </Button>
+                      </button>
                       {productId.error && (
                         <Stack spacing="tight">
                           <Icon source={AlertMinor} color="critical" />
@@ -339,7 +341,7 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
                   )}
                 </Card.Section>
                 <Card.Section title="Scan Destination">
-                  <ChoiceList
+                  <ChoiceList className="py-4 text-sm font-semibold leading-none tracking-wide text-center text-white uppercase bg-indigo-500 rounded-t"
                     title="Scan destination"
                     titleHidden
                     choices={[
@@ -357,6 +359,7 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
               <Card
                 sectioned
                 title="Discount"
+                className="my-5 text-base font-medium tracking-tight uppercase"
                 actions={[
                   {
                     content: "Create discount",
@@ -384,14 +387,14 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
               </Card>
             </FormLayout>
           </Form>
-        </Layout.Section>
-        <Layout.Section secondary>
+        </div>
+        <div className="w-full p-4 mx-auto mb-0 sm:mb-16 lg:mb-0 lg:w-1/2" secondary>
           <Card sectioned title="QR code">
             {QRCode ? (
               <EmptyState imageContained={true} image={QRCodeURL} />
             ) : (
               <EmptyState>
-                <p>Your QR code will appear here after you save.</p>
+                <p className="my-5 text-base font-medium tracking-tight text-indigo-500">Your QR code will appear here after you save.</p>
               </EmptyState>
             )}
             <Stack vertical>
@@ -404,17 +407,18 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
               >
                 Download
               </Button>
-              <Button
+              <button
+                className="relative self-start inline-block w-auto px-4 py-2 mx-auto mt-0 text-base font-400 text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0 w-full"
                 fullWidth
                 onClick={goToDestination}
                 disabled={!selectedProduct}
               >
                 Go to destination
-              </Button>
+              </button>
             </Stack>
           </Card>
-        </Layout.Section>
-        <Layout.Section>
+        </div>
+        <div>
           {QRCode?.id && (
             <Button
               outline
@@ -425,9 +429,9 @@ export function QRCodeForm({ QRCode: InitialQRCode }) {
               Delete QR code
             </Button>
           )}
-        </Layout.Section>
-      </Layout>
-    </Stack>
+        </div>
+      </div>
+    </div>
   );
 }
 
